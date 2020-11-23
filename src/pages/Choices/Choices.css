@@ -1,0 +1,24 @@
+.choices {
+  padding: 15px;
+  height: 100%;
+}
+
+.choices__image-container {
+  height: calc(100% - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.choices__button-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+}
+
+.choices__logo {
+  height: 180px;
+  width: 180px;
+}

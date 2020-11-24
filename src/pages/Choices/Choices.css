@@ -3,8 +3,18 @@
   height: 100%;
 }
 
+.choices__title-container {
+  text-align: center;
+}
+
 .choices__image-container {
-  height: calc(100% - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 245px);
+}
+
+.choices__ingredientes-container {
   display: flex;
   align-items: center;
   justify-content: center;

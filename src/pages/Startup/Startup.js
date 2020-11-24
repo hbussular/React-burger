@@ -1,8 +1,8 @@
 import React from "react"
+import { Image } from "react-bootstrap"
 
 import Layout from "../../components/Layout/Layout"
 import Button from "../../components/Button/PrimaryButton"
-import { Image } from "react-bootstrap"
 
 import logo from "../../assets/images/logo.svg"
 import "./Startup.css"

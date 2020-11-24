@@ -6,38 +6,15 @@ import IngredientsSwitcherBox from "./IngredientsSwitcherBox"
 
 import "./IngredientsSwitcher.css"
 
-const ingredients2 = [
-  [
-    {
-      name: "Mostard",
-      pictureUrl: ""
-    },
-    {
-      name: "ketchup",
-      pictureUrl: ""
-    },
-    {
-      name: "Maionese",
-      pictureUrl: ""
-    }
-  ],
-  [
-    {
-      name: "Picles",
-      pictureUrl: ""
-    }
-  ]
-]
-
-const IngredientsSwitcher = ({ ingredientsData }) => {
+const IngredientsSwitcher = ({ ingredients }) => {
   return (
     <div className="ingredients-switcher">
-      <Carousel indicators={false}>
-        {ingredients2.map(subGroup => (
-          <CarouselItem>
+      <Carousel indicators={false} slide={false} interval={null}>
+        {ingredients.map((subGroup, idx) => (
+          <CarouselItem key={`sg-ingredients-${idx}`}>
             <Row>
-              {subGroup.map(ingredient => (
-                <Col xs={4} md={4}>
+              {subGroup.map((ingredient, idy) => (
+                <Col xs={4} md={4} key={`ingredient-${idy}`}>
                   <IngredientsSwitcherBox name={ingredient.name} picture={ingredient.picture} />
                 </Col>
               ))}

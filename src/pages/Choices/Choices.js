@@ -1,44 +1,38 @@
-import React, { useState } from "react"
+import React from "react";
+import { Image } from "react-bootstrap";
 
-import ChoicesScreen from "./components/ChoicesLayout"
-import "./Choices.css"
+import Layout from "../../components/Layout/Layout";
+import HeaderWithTwoButtons from "../../components/Header/HeaderWithTwoButtons";
+import Heading from "../../components/Heading/Heading";
+import PrimaryButton from "../../components/Button/PrimaryButton";
+import IngredientsSwitcher from "../../components/IngredientsSwitcher/IngredientsSwitcher";
 
-const ingredients2 = [
-  [
-    {
-      name: "Mostard",
-      pictureUrl: ""
-    },
-    {
-      name: "ketchup",
-      pictureUrl: ""
-    },
-    {
-      name: "Maionese",
-      pictureUrl: ""
-    }
-  ],
-  [
-    {
-      name: "Picles",
-      pictureUrl: ""
-    }
-  ]
-]
+import logo from "../../assets/images/logo.svg";
+import "./Choices.css";
 
-const Choices = () => {
-  const [currentPage, setCurrentPage] = useState("bread")
+const Choices = ({ ingredients, title, onClose, onBack, onNext }) => (
+  <Layout
+    headerComponent={() => (
+      <HeaderWithTwoButtons onClose={onClose} onBack={onBack} />
+    )}
+  >
+    <div className="choices">
+      <div className="choices__title-container">
+        <Heading type="h3">{title}</Heading>
+      </div>
+      <div className="choices__image-container">
+        <Image src={logo} className="choices__logo" fluid />
+      </div>
+      <div className="choices__ingredients-container">
+        <IngredientsSwitcher ingredients={ingredients} />
+      </div>
+      <div className="choices__button-container">
+        <PrimaryButton block onClick={onNext}>
+          Continuar
+        </PrimaryButton>
+      </div>
+    </div>
+  </Layout>
+);
 
-  switch (currentPage) {
-    case "bread":
-      return <ChoicesScreen title="Escolha o pão" ingredients={ingredients2} onBack={() => console.log("Voltar!")} onClose={() => console.log("fechar!")} onNext={() => setCurrentPage("meat")} />
-    case "meat":
-      return <ChoicesScreen title="Escolha a carne" ingredients={ingredients2} onBack={() => setCurrentPage("bread")} onClose={() => console.log("fechar!")} onNext={() => setCurrentPage("salad")} />
-    case "salad":
-      return <ChoicesScreen title="Escolha a salada" ingredients={ingredients2} onBack={() => setCurrentPage("meat")} onClose={() => console.log("fechar!")} onNext={() => console.log("proxima tela!")} />
-    default:
-      break
-  }
-}
-
-export default Choices
+export default Choices;

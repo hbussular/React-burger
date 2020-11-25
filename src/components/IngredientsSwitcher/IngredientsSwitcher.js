@@ -1,12 +1,12 @@
-import React from "react"
-import { Carousel } from "react-bootstrap"
-import { CarouselItem, Row, Col } from "react-bootstrap"
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import { CarouselItem, Row, Col } from "react-bootstrap";
 
-import IngredientsSwitcherBox from "./IngredientsSwitcherBox"
+import IngredientsSwitcherBox from "./IngredientsSwitcherBox";
 
-import "./IngredientsSwitcher.css"
+import "./IngredientsSwitcher.css";
 
-const IngredientsSwitcher = ({ ingredients }) => {
+const IngredientsSwitcher = ({ ingredients, onIngredientSelect }) => {
   return (
     <div className="ingredients-switcher">
       <Carousel indicators={false} slide={false} interval={null}>
@@ -15,7 +15,11 @@ const IngredientsSwitcher = ({ ingredients }) => {
             <Row>
               {subGroup.map((ingredient, idy) => (
                 <Col xs={4} md={4} key={`ingredient-${idy}`}>
-                  <IngredientsSwitcherBox name={ingredient.name} picture={ingredient.picture} />
+                  <IngredientsSwitcherBox
+                    name={ingredient.name}
+                    picture={ingredient.picture}
+                    onClick={() => onIngredientSelect(ingredient)}
+                  />
                 </Col>
               ))}
             </Row>
@@ -23,7 +27,7 @@ const IngredientsSwitcher = ({ ingredients }) => {
         ))}
       </Carousel>
     </div>
-  )
-}
+  );
+};
 
-export default IngredientsSwitcher
+export default IngredientsSwitcher;

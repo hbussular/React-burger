@@ -12,6 +12,11 @@ import { AppContext } from "../../AppRouter";
 
 import "./Destination.css";
 
+const mapOptions = {
+  fullscreenControl: false,
+  zoomControl: false
+};
+
 const Destination = ({ onNext, coords }) => {
   const [_, setContext] = useContext(AppContext);
   const [currentCoords, setCurrentCoords] = useState({
@@ -44,6 +49,7 @@ const Destination = ({ onNext, coords }) => {
             }}
             defaultCenter={currentCoords}
             defaultZoom={defaultProps.zoom}
+            options={mapOptions}
           >
             <FontAwesomeIcon
               icon={faMapMarker}

@@ -1,0 +1,20 @@
+.destination {
+    height: calc(100% - 76px);
+    margin-top: 76px;
+}
+
+.destination__maps-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.destination__button-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+}

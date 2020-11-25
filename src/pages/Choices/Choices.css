@@ -1,6 +1,7 @@
 .choices {
   padding: 15px;
-  height: 100%;
+  height: calc(100% - 76px);
+  margin-top: 76px;
 }
 
 .choices__title-container {
@@ -12,6 +13,7 @@
   align-items: center;
   justify-content: center;
   height: calc(100% - 245px);
+  text-align: center;
 }
 
 .choices__ingredientes-container {

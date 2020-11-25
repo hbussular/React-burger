@@ -1,69 +1,65 @@
 import React, { useState } from "react";
 import Startup from "./pages/Startup/Startup";
-import Choices from "./components/ChoicesLayout";
+import ChoicesBread from "./pages/Choices/ChoicesBread";
+import ChoicesMeat from "./pages/Choices/ChoicesMeat";
+import ChoicesSalad from "./pages/Choices/ChoicesSalad";
+import Destination from "./pages/Destination/Destination";
 
-const ingredients2 = [
-  [
-    {
-      name: "Mostard",
-      pictureUrl: ""
-    },
-    {
-      name: "ketchup",
-      pictureUrl: ""
-    },
-    {
-      name: "Maionese",
-      pictureUrl: ""
-    }
-  ],
-  [
-    {
-      name: "Picles",
-      pictureUrl: ""
-    }
-  ]
-];
+const INITIAL_STATE = {
+  ingredients: [],
+  address: null,
+  weather: null
+};
+
+export const AppContext = React.createContext(INITIAL_STATE);
 
 const AppRouter = () => {
-  const [currentPage, setCurrentPage] = useState("startup");
+  const [currentPage, setCurrentPage] = useState("destination");
 
-  switch (currentPage) {
-    case "startup":
-      return <Startup onNext={() => setCurrentPage("bread")} />;
-    case "bread":
-      return (
-        <Choices
-          title="Escolha o pão"
-          ingredients={ingredients2}
-          onBack={() => setCurrentPage("startup")}
-          onClose={() => setCurrentPage("startup")}
-          onNext={() => setCurrentPage("meat")}
-        />
-      );
-    case "meat":
-      return (
-        <Choices
-          title="Escolha a carne"
-          ingredients={ingredients2}
-          onBack={() => setCurrentPage("bread")}
-          onClose={() => setCurrentPage("startup")}
-          onNext={() => setCurrentPage("salad")}
-        />
-      );
-    case "salad":
-      return (
-        <Choices
-          title="Escolha a salada"
-          ingredients={ingredients2}
-          onBack={() => setCurrentPage("meat")}
-          onClose={() => setCurrentPage("startup")}
-          onNext={() => console.log("proxima tela!")}
-        />
-      );
-    default:
-      break;
-  }
+  const [ingredients, setIngredients] = React.useState(
+    INITIAL_STATE.ingredients
+  );
+  const [address, setAddress] = React.useState(INITIAL_STATE.address);
+  const [weather, setWeather] = React.useState(INITIAL_STATE.weather);
+
+  const setContext = (data, path) => {
+    switch (path) {
+      case "ingredients":
+        setIngredients([...ingredients, data]);
+        break;
+      case "address":
+        setAddress(data);
+        break;
+      case "weather":
+        setWeather(data);
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
+    <AppContext.Provider
+      value={[{ address, weather, ingredients }, setContext]}
+    >
+      {(() => {
+        switch (currentPage) {
+          case "startup":
+            return <Startup onNext={() => setCurrentPage("bread")} />;
+          case "bread":
+            return <ChoicesBread setCurrentPage={setCurrentPage} />;
+          case "meat":
+            return <ChoicesMeat setCurrentPage={setCurrentPage} />;
+          case "salad":
+            return <ChoicesSalad setCurrentPage={setCurrentPage} />;
+          case "destination":
+            return <Destination onNext={() => setCurrentPage("startup")} />;
+          default:
+            return null;
+        }
+      })()}
+    </AppContext.Provider>
+  );
 };
 
 export default AppRouter;

@@ -1,5 +1,5 @@
-import React from "react"
-import "./Layout.css"
+import React from "react";
+import "./Layout.css";
 
 /**
  * HeaderComponent (existe?) E (<div></div>) logo, <div></div> é renderizado. Lembrando que o argumento <div></div> sempre é verdadeiro.
@@ -16,6 +16,6 @@ const Layout = ({ children, headerComponent: HeaderComponent }) => (
       {children}
     </div>
   </div>
-)
+);
 
-export default Layout
+export default Layout;

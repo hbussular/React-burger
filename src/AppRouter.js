@@ -53,7 +53,9 @@ const AppRouter = () => {
           case "salad":
             return <ChoicesSalad setCurrentPage={setCurrentPage} />;
           case "destination":
-            return <Destination onNext={() => setCurrentPage("startup")} />;
+            return <Destination setCurrentPage={setCurrentPage} />;
+          case "confirmation":
+            return <Destination setCurrentPage={setCurrentPage} />;
           default:
             return null;
         }

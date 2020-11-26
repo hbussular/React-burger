@@ -1,0 +1,16 @@
+.ingredients-switcher {
+    display: inline-flex;
+}
+
+.ingredients-switcher__box {
+    border: 1px solid #ccc;
+    flex: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 8px;
+}
+
+
+.ingredients-switcher__box:hover {
+    border: 1px solid rgb(36, 192, 49);
+}

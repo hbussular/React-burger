@@ -4,7 +4,8 @@ import "./IngredientsSwitcherBox.css";
 
 const IngredientsSwitcherBox = ({ name, picture, onClick }) => (
   <div className="ingredients-switcher-box" onClick={onClick}>
-    <Image src={"https://place-hold.it/300x500"} fluid />
+    <Image src={picture} fluid roundedCircle />
+    <div className="ingredients-switcher-box__title">{name}</div>
   </div>
 );
 

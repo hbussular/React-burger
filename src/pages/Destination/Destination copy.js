@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-
+import GoogleMapReact from "google-map-react";
 import { geolocated } from "react-geolocated";
 import { get } from "lodash";
-import { compose } from "recompose";
 import { Image } from "react-bootstrap";
 
 import Layout from "../../components/Layout/Layout";
@@ -16,7 +14,7 @@ import { store } from "../../store.js";
 
 import "./Destination.css";
 
-const Destination = ({ coords, google }) => {
+const Destination = ({ coords }) => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
@@ -70,7 +68,7 @@ const Destination = ({ coords, google }) => {
     >
       <div className="destination">
         <div className="destination__maps-container">
-          {/* <GoogleMapReact
+          <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_GMAPS_KEY
             }}
@@ -82,15 +80,7 @@ const Destination = ({ coords, google }) => {
             }}
           >
             <div>a</div>
-          </GoogleMapReact> */}
-          <Map google={google} zoom={14}>
-            <Marker onClick={() => {}} name={"Current location"} />
-            <InfoWindow onClose={() => {}}>
-              <div>
-                <h1>aaa</h1>
-              </div>
-            </InfoWindow>
-          </Map>
+          </GoogleMapReact>
         </div>
         <div className="destination__button-container">
           <PrimaryButton block onClick={() => navToNextPage("confirmation")}>
@@ -102,14 +92,9 @@ const Destination = ({ coords, google }) => {
   );
 };
 
-export default compose(
-  GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GMAPS_KEY
-  }),
-  geolocated({
-    positionOptions: {
-      enableHighAccuracy: false
-    },
-    userDecisionTimeout: 5000
-  })
-)(Destination);
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(Destination);

@@ -14,6 +14,8 @@ const Heading = ({ children, type }) => {
       return <h5>{children}</h5>;
     case "h6":
       return <h6>{children}</h6>;
+    case "h7":
+      return <h7>{children}</h7>;
     default:
       return children;
   }

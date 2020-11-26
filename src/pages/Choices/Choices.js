@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
-import { isEmpty } from "lodash";
 
 import Layout from "../../components/Layout/Layout";
 import HeaderWithTwoButtons from "../../components/Header/HeaderWithTwoButtons";
 import Heading from "../../components/Heading/Heading";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import IngredientsSwitcher from "../../components/IngredientsSwitcher/IngredientsSwitcher";
-
-import { store } from "../../store.js";
 
 import "./Choices.css";
 

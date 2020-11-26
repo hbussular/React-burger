@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-
+import React, { useContext, useEffect } from "react";
+import GoogleMapReact from "google-map-react";
 import { geolocated } from "react-geolocated";
 import { get } from "lodash";
-import { compose } from "recompose";
 import { Image } from "react-bootstrap";
 
 import Layout from "../../components/Layout/Layout";
@@ -16,44 +14,42 @@ import { store } from "../../store.js";
 
 import "./Destination.css";
 
-const Destination = ({ coords, google }) => {
+const Destination = ({ coords }) => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
-  const [currentCoords, setCurrentCoords] = useState({
-    lat: -20.3541156,
-    lng: -40.2992142
-  });
-
   const navToNextPage = page => dispatch({ type: "navigate", data: page });
+
+  const updateWeatherAndCoords = async ({ lat, lng }) => {
+    dispatch({
+      type: "coords",
+      data: {
+        lat: parseFloat(lat).toFixed(4),
+        lng: parseFloat(lng).toFixed(4)
+      }
+    });
+
+    const { data } = await weatherAPI.getWeather({
+      latitude: lat,
+      longitude: lng
+    });
+
+    dispatch({
+      type: "weather",
+      data: {
+        temperature: get(data, "results.temp", null),
+        condition: get(data, "results.description", null)
+      }
+    });
+  };
+
+  const handleOnBoundsChange = ({ center }) => {
+    updateWeatherAndCoords({ lat: center.lat, lng: center.lng });
+  };
 
   useEffect(async () => {
     if (coords && coords.latitude && coords.longitude) {
-      setCurrentCoords({
-        lat: Math.round(coords.latitude),
-        lng: Math.round(coords.longitude)
-      });
-
-      dispatch({
-        type: "coords",
-        data: {
-          lat: Math.round(coords.latitude),
-          lng: Math.round(coords.longitude)
-        }
-      });
-
-      const { data } = await weatherAPI.getWeather({
-        latitude: coords.latitude,
-        longitude: coords.longitude
-      });
-
-      dispatch({
-        type: "weather",
-        data: {
-          temperature: get(data, "results.temp", null),
-          condition: get(data, "results.description", null)
-        }
-      });
+      updateWeatherAndCoords({ lat: coords.latitude, lng: coords.longitude });
     }
 
     return () => {};
@@ -70,27 +66,22 @@ const Destination = ({ coords, google }) => {
     >
       <div className="destination">
         <div className="destination__maps-container">
-          {/* <GoogleMapReact
+          <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_GMAPS_KEY
             }}
-            defaultCenter={currentCoords}
+            defaultCenter={{
+              lat: -20.3541156,
+              lng: -40.2992142
+            }}
             defaultZoom={17}
             options={{
               fullscreenControl: false,
               zoomControl: false
             }}
-          >
-            <div>a</div>
-          </GoogleMapReact> */}
-          <Map google={google} zoom={14}>
-            <Marker onClick={() => {}} name={"Current location"} />
-            <InfoWindow onClose={() => {}}>
-              <div>
-                <h1>aaa</h1>
-              </div>
-            </InfoWindow>
-          </Map>
+            onChange={handleOnBoundsChange}
+          ></GoogleMapReact>
+          <Image src={pin} className="destination__pin" />
         </div>
         <div className="destination__button-container">
           <PrimaryButton block onClick={() => navToNextPage("confirmation")}>
@@ -102,14 +93,9 @@ const Destination = ({ coords, google }) => {
   );
 };
 
-export default compose(
-  GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GMAPS_KEY
-  }),
-  geolocated({
-    positionOptions: {
-      enableHighAccuracy: false
-    },
-    userDecisionTimeout: 5000
-  })
-)(Destination);
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(Destination);

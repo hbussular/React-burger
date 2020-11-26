@@ -1,18 +1,34 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Image } from "react-bootstrap";
+import { isEmpty } from "lodash";
 
 import Layout from "../../components/Layout/Layout";
 import HeaderWithTwoButtons from "../../components/Header/HeaderWithTwoButtons";
 import Heading from "../../components/Heading/Heading";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import IngredientsSwitcher from "../../components/IngredientsSwitcher/IngredientsSwitcher";
-import { AppContext } from "../../AppRouter";
+
+import { store } from "../../store.js";
 
 import "./Choices.css";
 
-const Choices = ({ ingredients, title, onClose, onBack, onNext }) => {
+const Choices = ({
+  ingredients,
+  title,
+  onClose,
+  onBack,
+  onNext,
+  onIngredientSelect
+}) => {
   const [selectedIngrendient, setSelectedIngredients] = useState({});
-  const [_, setContext] = useContext(AppContext);
+
+  useEffect(() => {
+    if (ingredients) {
+      setSelectedIngredients(ingredients[0][0]);
+    }
+
+    return () => {};
+  }, [ingredients]);
 
   return (
     <Layout
@@ -22,7 +38,7 @@ const Choices = ({ ingredients, title, onClose, onBack, onNext }) => {
     >
       <div className="choices">
         <div className="choices__title-container">
-          <Heading type="h3">{title}</Heading>
+          <div className="choices__title">{title}</div>
         </div>
         <div className="choices__image-container">
           <div>
@@ -46,7 +62,7 @@ const Choices = ({ ingredients, title, onClose, onBack, onNext }) => {
           <PrimaryButton
             block
             onClick={() => {
-              setContext(selectedIngrendient, "ingredients");
+              onIngredientSelect(selectedIngrendient);
               onNext();
             }}
           >

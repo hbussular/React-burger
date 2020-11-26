@@ -4,7 +4,7 @@ import Choices from "./Choices";
 import * as mockIngredients from "../../mocks/ingredients";
 import { store } from "../../store.js";
 
-const ChoicesBread = () => {
+const ChoicesCheese = () => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
@@ -12,11 +12,11 @@ const ChoicesBread = () => {
 
   return (
     <Choices
-      title="Escolha o pão"
-      ingredients={mockIngredients.breadIngredients}
-      onBack={() => navToNextPage("startup")}
+      title="Escolha o queijo"
+      ingredients={mockIngredients.cheeseIngredients}
+      onBack={() => navToNextPage("souce")}
       onClose={() => navToNextPage("startup")}
-      onNext={() => navToNextPage("meat")}
+      onNext={() => navToNextPage("destination")}
       onIngredientSelect={ingredient =>
         dispatch({ type: "ingredients", data: ingredient })
       }
@@ -24,4 +24,4 @@ const ChoicesBread = () => {
   );
 };
 
-export default ChoicesBread;
+export default ChoicesCheese;

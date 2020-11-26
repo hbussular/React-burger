@@ -2,13 +2,15 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { geolocated } from "react-geolocated";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "../../components/Layout/Layout";
 import HeaderWithTwoButtons from "../../components/Header/HeaderWithTwoButtons";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AppContext } from "../../AppRouter";
+
+import * as weatherAPI from "../../services/weather";
 
 import "./Destination.css";
 
@@ -17,7 +19,7 @@ const mapOptions = {
   zoomControl: false
 };
 
-const Destination = ({ onNext, coords }) => {
+const Destination = ({ setCurrentPage, coords }) => {
   const [_, setContext] = useContext(AppContext);
   const [currentCoords, setCurrentCoords] = useState({
     lat: -20.3541156,
@@ -28,37 +30,57 @@ const Destination = ({ onNext, coords }) => {
     zoom: 15
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (coords && coords.latitude && coords.longitude) {
       setCurrentCoords({
         lat: coords.latitude,
         lng: coords.longitude
       });
+
+      const { data } = await weatherAPI.getWeather({
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      });
+
+      setContext(
+        {
+          temperature: _.get(data, "temp", null),
+          condition: _.get(data, "description")
+        },
+        "weather"
+      );
     }
 
     return () => {};
   }, [coords]);
 
   return (
-    <Layout headerComponent={() => <HeaderWithTwoButtons />}>
+    <Layout
+      headerComponent={() => (
+        <HeaderWithTwoButtons
+          onBack={() => setCurrentPage("salad")}
+          onClose={() => setCurrentPage("startup")}
+        />
+      )}
+    >
       <div className="destination">
         <div className="destination__maps-container">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: "AIzaSyCfE3hA6ebRtW2qx28b_qRxcykWXrghOxY"
+              key: process.env.REACT_APP_GMAPS_KEY
             }}
             defaultCenter={currentCoords}
             defaultZoom={defaultProps.zoom}
             options={mapOptions}
           >
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               icon={faMapMarker}
               style={{ height: 40, width: 40, color: "#feb602" }}
-            />
+            /> */}
           </GoogleMapReact>
         </div>
         <div className="destination__button-container">
-          <PrimaryButton block onClick={onNext}>
+          <PrimaryButton block onClick={() => setCurrentPage("confirmation")}>
             Finalizar Pedido
           </PrimaryButton>
         </div>

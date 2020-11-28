@@ -21,16 +21,16 @@ const Confirmation = () => {
         <div className="confirmation__title-container">
           <div className="confirmation__title">Pedido confirmado!</div>
         </div>
-        <strong style={{ paddingTop: 15 }}>Ingredientes:</strong>
+        <span className="confirmation__subtitle">Ingredientes:</span>
         <hr />
-        <ul style={{ paddingLeft: 15 }}>
+        <ul className="confirmation__ul-entrega">
           {state.ingredients.map(item => (
             <li>{item.name}</li>
           ))}
         </ul>
-        <strong>Entrega:</strong>
+        <span className="confirmation__subtitle">Entrega:</span>
         <hr />
-        <ul style={{ paddingLeft: 15 }}>
+        <ul className="confirmation__ul-entrega">
           <li>
             <strong>Condição do tempo: </strong>
             {get(state, "weatherAddress.condition", null)},{" "}

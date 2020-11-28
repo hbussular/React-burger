@@ -6,6 +6,7 @@
   
 .confirmation__title-container {
     text-align: center;
+    padding-bottom: 25px;
 }
   
 .confirmation__image-container {
@@ -37,7 +38,16 @@
   
 .confirmation__title {
     text-align: center;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 650;
     line-height: 40px;
-    }
+}
+
+.confirmation__subtitle {
+    padding-top: 15px;
+    font-weight: bold;
+}
+
+.confirmation__ul-entrega {
+    padding-left: 15px;
+}

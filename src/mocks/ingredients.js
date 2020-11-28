@@ -68,8 +68,8 @@ export const meatIngredients = [
 export const cheeseIngredients = [
   [
     {
-      name: "Queijo Cheedar",
-      shortName: "Queijo Cheedar",
+      name: "Queijo Cheddar",
+      shortName: "Queijo Cheddar",
       picture: cheese
     },
     {

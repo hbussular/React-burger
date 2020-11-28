@@ -19,3 +19,6 @@ $ npm run dev
 - Recompose
 
 ### Screenshots da aplicação
+
+
+### OBS importante: a API HGWeather que obtém o clima do local selecionado no mapa suporta apenas 10 usos diarios. Após isso a mesma é bloqueada e não se obtém mais o clima local.

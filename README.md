@@ -36,3 +36,14 @@ $ npm run dev
 ### Melhorias futuras
 
 - Capturar a rua/avenida, número, entre outras informações do usuário.
+
+
+### Screenshots
+
+![alt-text-1](screenshots/screen1.png "Tela inicial")
+![alt-text-2](screenshots/screen2.png "Escolha de ingrediente - Pão")
+![alt-text-3](screenshots/screen3.png "Escolha de ingrediente - Carne")
+![alt-text-4](screenshots/screen4.png "Escolha de ingrediente - Molho")
+![alt-text-5](screenshots/screen5.png "Escolha de ingrediente - Queijo")
+![alt-text-6](screenshots/screen6.png "Localização")
+![alt-text-7](screenshots/screen7.png "Confirmação")

@@ -13,6 +13,7 @@ import { StateProvider } from "./store.js";
 const AppRouter = () => (
   <StateProvider>
     {state => {
+      console.log(state);
       switch (state.currentPage) {
         case "startup":
           return <Startup />;

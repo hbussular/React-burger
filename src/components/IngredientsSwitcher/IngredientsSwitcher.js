@@ -1,6 +1,7 @@
 import React from "react";
 import IngredientsSwitcherBox from "./IngredientsSwitcherBox";
 import { isEqual } from "lodash";
+import cx from "classnames";
 
 import "./IngredientsSwitcher.css";
 
@@ -11,25 +12,23 @@ const IngredientsSwitcher = ({
 }) => {
   return (
     <div className="ingredients-switcher">
-      {ingredients.map((subGroup, idx) =>
-        subGroup.map((ingredient, idy) => (
+      {ingredients.map((ingredient, idx) => {
+        const isSelected = isEqual(ingredient, selectedIngredient);
+        return (
           <div
-            className={[
-              "ingredients-switcher__box",
-              isEqual(selectedIngredient, selectedIngredient) &&
-                "ingredients-switcher__box--selected"
-            ]}
-            key={`ingredient-${idx}-${idy}`}
+            className={cx("ingredients-switcher__box", {
+              "ingredients-switcher__box--selected": isSelected
+            })}
+            key={`ingredient-${idx}`}
           >
             <IngredientsSwitcherBox
               name={ingredient.shortName}
               picture={ingredient.picture}
               onClick={() => onIngredientSelect(ingredient)}
-              isSelected={selectedIngredient}
             />
           </div>
-        ))
-      )}
+        );
+      })}
     </div>
   );
 };

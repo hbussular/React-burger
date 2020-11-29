@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Choices from "./Choices";
 import { get } from "lodash";
 
-import * as mockIngredients from "../../mocks/ingredients";
+import { breadIngredients } from "../../mocks/ingredients";
 import { store } from "../../store.js";
 
 const ChoicesBread = () => {
@@ -10,19 +10,20 @@ const ChoicesBread = () => {
   const { dispatch, state } = globalState;
 
   const navToNextPage = page => dispatch({ type: "navigate", data: page });
-  const ingredients = get(state, "ingredients", []);
+  const currentIngredient =
+    get(state, "ingredients.bread") || breadIngredients[0];
 
   return (
     <Choices
       title="Escolha o pão"
-      ingredients={mockIngredients.breadIngredients}
+      ingredients={breadIngredients}
       onBack={() => navToNextPage("startup")}
       onClose={() => navToNextPage("startup")}
       onNext={() => navToNextPage("meat")}
       onIngredientSelect={ingredient =>
-        dispatch({ type: "ingredients", data: ingredient })
+        dispatch({ type: "ingredients", data: { bread: ingredient } })
       }
-      selectedIngredient={ingredients[0] || mockIngredients.breadIngredients[0]}
+      currentIngredient={currentIngredient}
     />
   );
 };

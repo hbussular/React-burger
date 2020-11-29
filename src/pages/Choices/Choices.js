@@ -8,6 +8,7 @@ import PrimaryButton from "../../components/Button/PrimaryButton";
 import IngredientsSwitcher from "../../components/IngredientsSwitcher/IngredientsSwitcher";
 
 import "./Choices.css";
+import { get } from "lodash";
 
 const Choices = ({
   ingredients,
@@ -16,8 +17,18 @@ const Choices = ({
   onBack,
   onNext,
   onIngredientSelect,
-  selectedIngredient
+  currentIngredient
 }) => {
+  const [selectedIngredient, setSelectedIngredient] = useState(
+    currentIngredient
+  );
+
+  useEffect(() => {
+    onIngredientSelect(selectedIngredient);
+
+    return () => {};
+  }, [selectedIngredient]);
+
   return (
     <Layout
       headerComponent={() => (
@@ -31,17 +42,17 @@ const Choices = ({
         <div className="choices__image-container">
           <div>
             <Image
-              src={selectedIngredient.picture}
+              src={get(selectedIngredient, "picture", null)}
               className="choices__logo"
               fluid
             />
-            <Heading type="h6">{selectedIngredient.name}</Heading>
+            <Heading type="h6">{get(selectedIngredient, "name", null)}</Heading>
           </div>
         </div>
         <div className="choices__ingredients-container">
           <IngredientsSwitcher
             ingredients={ingredients}
-            onIngredientSelect={onIngredientSelect}
+            onIngredientSelect={ingredient => setSelectedIngredient(ingredient)}
             selectedIngredient={selectedIngredient}
           />
         </div>

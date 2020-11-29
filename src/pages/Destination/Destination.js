@@ -46,11 +46,14 @@ const Destination = ({ coords }) => {
       longitude: lng
     });
 
+    const temperature = get(data, "main.temp", null);
+    const weather = get(data, "weather", []);
+
     dispatch({
       type: "weather",
       data: {
-        temperature: get(data, "results.temp", null),
-        condition: get(data, "results.description", null)
+        temperature: temperature,
+        condition: weather.length > 0 ? weather[0].description : null
       }
     });
   };

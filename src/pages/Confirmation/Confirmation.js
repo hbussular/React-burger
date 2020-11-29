@@ -41,7 +41,7 @@ const Confirmation = () => {
             <strong>Tempo de entrega: </strong>
             {getDeliveryTime({
               temperature: get(state, "weatherAddress.temperature", null),
-              condition: get(state, "weatherAddress.condition", null),
+              weather: get(state, "weatherAddress.condition", null),
               estimatedTime: 30
             })}
             {" minutos."}

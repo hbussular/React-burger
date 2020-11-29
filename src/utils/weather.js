@@ -1,11 +1,11 @@
 /**
  * Essa função retorna o tempo de entrega com base na temperatura e condiçãodo clima.
  * @param {number} temperature
- * @param {string} condition
+ * @param {string} weather
  * @param {number} estimatedTime
  */
 
-export const getDeliveryTime = ({ temperature, condition, estimatedTime }) => {
+export const getDeliveryTime = ({ temperature, weather, estimatedTime }) => {
   let points = 0;
 
   if (temperature <= 20) {
@@ -16,11 +16,11 @@ export const getDeliveryTime = ({ temperature, condition, estimatedTime }) => {
     points -= 0.05;
   }
 
-  if (String(condition).toLowerCase() === "parcialmente nublado") {
+  if (weather.includes("nuvens")) {
     points += 0.05;
   }
 
-  if (String(condition).toLowerCase() === "alguns chuviscos") {
+  if (weather.includes("névoa")) {
     points += 0.2;
   }
 

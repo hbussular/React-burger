@@ -108,7 +108,6 @@ const Destination = ({ coords }) => {
                 key: process.env.REACT_APP_GMAPS_KEY
               }}
               center={currentPosition}
-              defaultCenter={currentPosition}
               defaultZoom={17}
               options={{
                 fullscreenControl: false,

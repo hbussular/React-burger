@@ -13,18 +13,12 @@ const createAxios = axios.create();
 
 //Encapsula a instância do axios de forma a personalizar alguns parametros e regras de negócio.
 
-const API = ({ url, method, data, headers = {}, queries = {}, ...rest }) => {
-  const mixinHeaders = { ...headers };
-  const mixinQueries = { ...queries };
-
-  return createAxios({
+const API = ({ url, method, data, ...rest }) =>
+  createAxios({
     url,
     method,
     data,
-    headers: mixinHeaders,
-    params: mixinQueries,
     ...rest
   });
-};
 
 export default API;

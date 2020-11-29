@@ -1,5 +1,9 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
+/*
+* Força os primeiros elementos da aplicação a terem tamanho 100%
+*/
+
 html,
 body,
 #root {

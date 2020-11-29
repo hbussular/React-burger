@@ -24,9 +24,10 @@ const Confirmation = () => {
         <span className="confirmation__subtitle">Ingredientes:</span>
         <hr />
         <ul className="confirmation__ul-entrega">
-          {state.ingredients.map(item => (
-            <li>{item.name}</li>
-          ))}
+          {<li>{get(state, "ingredients.bread.name", null)}</li>}
+          {<li>{get(state, "ingredients.meat.name", null)}</li>}
+          {<li>{get(state, "ingredients.souce.name", null)}</li>}
+          {<li>{get(state, "ingredients.cheese.name", null)}</li>}
         </ul>
         <span className="confirmation__subtitle">Entrega:</span>
         <hr />
@@ -44,10 +45,6 @@ const Confirmation = () => {
               estimatedTime: 30
             })}
             {" minutos."}
-          </li>
-          <li>
-            <strong>Endereço de entrega: </strong>
-            {get(state, "customerAddress.place", "Av. Rio Branco, 256")}
           </li>
         </ul>
         <div className="confirmation__button-container">

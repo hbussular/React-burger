@@ -25,7 +25,7 @@ $ npm run dev
 
 ### APIs
 
-- HGWeather - https://hgbrasil.com/status/weather
+- Open Weather Map - https://openweathermap.org/current#geo
 - Google Maps - https://developers.google.com/maps/documentation/javascript/overview
 
 

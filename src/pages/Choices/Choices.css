@@ -3,6 +3,14 @@
   padding-top: 0px;
   height: calc(100% - 76px);
   margin-top: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.choices__wrapper {
+  margin-top: -100px;
 }
 
 .choices__title-container {

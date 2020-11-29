@@ -10,7 +10,7 @@
     border-radius: 8px;
 }
 
-
+.ingredients-switcher__box--selected,
 .ingredients-switcher__box:hover {
     border: 1px solid rgb(36, 192, 49);
 }

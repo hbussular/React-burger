@@ -15,18 +15,9 @@ const Choices = ({
   onClose,
   onBack,
   onNext,
-  onIngredientSelect
+  onIngredientSelect,
+  selectedIngredient
 }) => {
-  const [selectedIngrendient, setSelectedIngredients] = useState({});
-
-  useEffect(() => {
-    if (ingredients) {
-      setSelectedIngredients(ingredients[0][0]);
-    }
-
-    return () => {};
-  }, [ingredients]);
-
   return (
     <Layout
       headerComponent={() => (
@@ -40,29 +31,22 @@ const Choices = ({
         <div className="choices__image-container">
           <div>
             <Image
-              src={selectedIngrendient.picture}
+              src={selectedIngredient.picture}
               className="choices__logo"
               fluid
             />
-            <Heading type="h6">{selectedIngrendient.name}</Heading>
+            <Heading type="h6">{selectedIngredient.name}</Heading>
           </div>
         </div>
         <div className="choices__ingredients-container">
           <IngredientsSwitcher
             ingredients={ingredients}
-            onIngredientSelect={ingredient =>
-              setSelectedIngredients(ingredient)
-            }
+            onIngredientSelect={onIngredientSelect}
+            selectedIngredient={selectedIngredient}
           />
         </div>
         <div className="choices__button-container">
-          <PrimaryButton
-            block
-            onClick={() => {
-              onIngredientSelect(selectedIngrendient);
-              onNext();
-            }}
-          >
+          <PrimaryButton block onClick={onNext}>
             Continuar
           </PrimaryButton>
         </div>

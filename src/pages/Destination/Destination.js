@@ -10,20 +10,17 @@ import Layout from "../../components/Layout/Layout";
 import HeaderWithTwoButtons from "../../components/Header/HeaderWithTwoButtons";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 
-import pin from "../../assets/images/pin.png";
-
 import * as weatherAPI from "../../services/weather";
 import { store } from "../../store.js";
 import { getPosition } from "../../utils/geolocation";
+
+import pin from "../../assets/images/pin.png";
 
 import "./Destination.css";
 
 const Destination = ({ coords }) => {
   const [mapIsLoaded, setMapIsLoaded] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState({
-    lat: -20.3541156,
-    lng: -40.2992142
-  });
+  const [currentPosition, setCurrentPosition] = useState(null);
 
   const globalState = useContext(store);
   const { dispatch } = globalState;
@@ -88,6 +85,7 @@ const Destination = ({ coords }) => {
   useEffect(async () => {
     if (coords && coords.latitude && coords.longitude) {
       updateWeatherAndCoords({ lat: coords.latitude, lng: coords.longitude });
+      setCurrentPosition({ lat: coords.latitude, lng: coords.longitude });
     }
 
     return () => {};
@@ -104,20 +102,22 @@ const Destination = ({ coords }) => {
     >
       <div className="destination">
         <div className="destination__maps-container">
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: process.env.REACT_APP_GMAPS_KEY
-            }}
-            center={currentPosition}
-            defaultCenter={currentPosition}
-            defaultZoom={17}
-            options={{
-              fullscreenControl: false,
-              zoomControl: false
-            }}
-            onChange={handleOnBoundsChange}
-            onGoogleApiLoaded={handleApiLoaded}
-          ></GoogleMapReact>
+          {currentPosition && (
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: process.env.REACT_APP_GMAPS_KEY
+              }}
+              center={currentPosition}
+              defaultCenter={currentPosition}
+              defaultZoom={17}
+              options={{
+                fullscreenControl: false,
+                zoomControl: false
+              }}
+              onChange={handleOnBoundsChange}
+              onGoogleApiLoaded={handleApiLoaded}
+            ></GoogleMapReact>
+          )}
           <Image src={pin} className="destination__pin" />
           <div className="destination__maps__center-button">
             <Button onClick={getCurrentPosition}>

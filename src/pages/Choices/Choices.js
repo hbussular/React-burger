@@ -36,25 +36,31 @@ const Choices = ({
       )}
     >
       <div className="choices">
-        <div className="choices__title-container">
-          <div className="choices__title">{title}</div>
-        </div>
-        <div className="choices__image-container">
-          <div>
-            <Image
-              src={get(selectedIngredient, "picture", null)}
-              className="choices__logo"
-              fluid
-            />
-            <Heading type="h6">{get(selectedIngredient, "name", null)}</Heading>
+        <div className="choices__wrapper">
+          <div className="choices__title-container">
+            <div className="choices__title">{title}</div>
           </div>
-        </div>
-        <div className="choices__ingredients-container">
-          <IngredientsSwitcher
-            ingredients={ingredients}
-            onIngredientSelect={ingredient => setSelectedIngredient(ingredient)}
-            selectedIngredient={selectedIngredient}
-          />
+          <div className="choices__image-container">
+            <div>
+              <Image
+                src={get(selectedIngredient, "picture", null)}
+                className="choices__logo"
+                fluid
+              />
+              <Heading type="h6">
+                {get(selectedIngredient, "name", null)}
+              </Heading>
+            </div>
+          </div>
+          <div className="choices__ingredients-container">
+            <IngredientsSwitcher
+              ingredients={ingredients}
+              onIngredientSelect={ingredient =>
+                setSelectedIngredient(ingredient)
+              }
+              selectedIngredient={selectedIngredient}
+            />
+          </div>
         </div>
         <div className="choices__button-container">
           <PrimaryButton block onClick={onNext}>

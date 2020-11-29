@@ -23,3 +23,14 @@
   position: relative;
   width: 320px;
 }
+
+@media (max-width: 768px) {
+  .layout {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .layout__portrait {
+    width: 100%;
+  }
+}

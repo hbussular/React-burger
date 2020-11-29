@@ -7,5 +7,5 @@ import API, { methods } from "./api";
 export const getWeather = ({ latitude, longitude }) =>
   API({
     method: methods.GET,
-    url: `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_HG_KEY}&units=metric&lang=pt_br`
+    url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_HG_KEY}&units=metric&lang=pt_br`
   });

@@ -1,5 +1,9 @@
 import API, { methods } from "./api";
 
+/**
+ * Recupera o clima da posição atual do usuário
+ * @param {object} { latitude, longitude }
+ */
 export const getWeather = ({ latitude, longitude }) =>
   API({
     method: methods.GET,

@@ -1,4 +1,4 @@
-# LawVR
+# React Burger
 
 
 ### Instruções para executar o projeto

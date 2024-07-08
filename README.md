@@ -1,4 +1,4 @@
-# React Burger
+# React Burger (Updated on 2024)
 
 
 ### Instruções para executar o projeto
